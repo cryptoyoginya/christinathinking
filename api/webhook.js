@@ -19,10 +19,10 @@ export default async function handler(req, res) {
 
   console.log("BODY:", JSON.stringify(req.body).slice(0, 500));
 
-  const ping = await fetch("https://api.telegram.org").then(r => r.status).catch(e => "FAIL: " + String(e?.cause));
-  console.log("PING:", ping);
-
   try {
+    const ping = await fetch("https://api.telegram.org").then(r => r.status).catch(e => "FAIL: " + String(e?.cause));
+    console.log("PING:", ping);
+
     const update = req.body;
     const msg = update.message || update.edited_message;
     if (!msg) { console.log("NO MSG"); return; }
@@ -43,7 +43,6 @@ export default async function handler(req, res) {
       (msg.document?.mime_type?.startsWith("audio/") ? msg.document : null);
 
     if (!fileObj) {
-      console.log("NO FILE OBJ");
       await sendMessage(chatId, "Пришли голосовое/аудио/кружочек — сделаю 📝 транскрипцию и 📋 заметку.");
       return;
     }
