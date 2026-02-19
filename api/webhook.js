@@ -20,6 +20,7 @@ export default async function handler(req, res) {
 
   // СРАЗУ отвечаем Telegram, чтобы не было таймаутов
   res.status(200).send("ok");
+  console.log("BODY:", JSON.stringify(req.body).slice(0, 500));
 
   try {
     const update = req.body;
