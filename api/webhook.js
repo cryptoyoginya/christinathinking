@@ -19,6 +19,9 @@ export default async function handler(req, res) {
 
   console.log("BODY:", JSON.stringify(req.body).slice(0, 500));
 
+  const ping = await fetch("https://api.telegram.org").then(r => r.status).catch(e => "FAIL: " + String(e?.cause));
+  console.log("PING:", ping);
+
   try {
     const update = req.body;
     const msg = update.message || update.edited_message;
