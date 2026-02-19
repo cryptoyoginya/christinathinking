@@ -80,7 +80,7 @@ export default async function handler(req, res) {
       await sendMessage(chatId, prefix + noteChunks[i], { parse_mode: "MarkdownV2" });
     }
   } catch (e) {
-    console.error(e);
-    // Молча не падаем — Telegram уже получил 200 OK
+    console.error("ERROR:", e?.message);
+    console.error("STACK:", e?.stack);
   }
 }
